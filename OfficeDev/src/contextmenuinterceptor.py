@@ -37,7 +37,7 @@ def enableRemoteDebugging(func):  # デバッグサーバーに接続したい�
             import traceback; traceback.print_exc()  # これがないとPyDevのコンソールにトレースバックが表示されない。stderrToServer=Trueが必須。
     return wrapper
 # @enableRemoteDebugging
-def macro():
+def macro():  # マクロで実行するとフリーズする。
     doc = XSCRIPTCONTEXT.getDocument()  # マクロを起動した時のドキュメントのモデルを取得。 
     infomsg = "All context menus of the created document frame contains now a 'Help' entry with the submenus 'Content', 'Help Agent' and 'Tips'.\n\nPress 'Return' in the shell to remove the context menu interceptor and finish the example!"
     doc.getText().setString(infomsg)
