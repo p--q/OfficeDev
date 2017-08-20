@@ -60,13 +60,13 @@ class ContextMenuInterceptor(unohelper.Base, XContextMenuInterceptor):
             contextmenu = contextmenuexecuteevent.ActionTriggerContainer  # com.sun.star.ui.ActionTriggerContainerサービスのインスタンスが返ってくる。
             createMenuEntry = menuentryCreator(contextmenu)
             submenucontainer = createMenuEntry("ActionTriggerContainer")
-            menuentry = createMenuEntry("ActionTrigger", {"Text": "Content", "CommandURL": "slot:5401", "HelpURL": "5401"})
+            menuentry = createMenuEntry("ActionTrigger", {"Text": "Content", "CommandURL": ".uno:HelpIndex", "HelpURL": "5401"})
             submenucontainer.insertByIndex(0, menuentry)  # 第1引数は挿入する位置。飛び番はエラーになる。そこにすでにあるものは下にずれる。
-            menuentry = createMenuEntry("ActionTrigger", {"Text": "Help Agent", "CommandURL": "slot:5962", "HelpURL": "5962"})
+            menuentry = createMenuEntry("ActionTrigger", {"Text": "Help Agent", "CommandURL": "slot: 5962", "HelpURL": "5962"})  # オリジナルのslot: 5962のコマンドURLでは項目が表示されない。該当するDispatch Commandもない。https://wiki.documentfoundation.org/Development/DispatchCommands
             submenucontainer.insertByIndex(1, menuentry)  # 第1引数は挿入する位置。飛び番はエラーになる。そこにすでにあるものは下にずれる。
-            menuentry = createMenuEntry("ActionTrigger", {"Text": "Tips", "CommandURL": "slot:5404", "HelpURL": "5404"})  # テェックボックスの表示はCommandURLによるもの？
+            menuentry = createMenuEntry("ActionTrigger", {"Text": "Tips", "CommandURL": ".uno:HelpTip", "HelpURL": "5404"})  # テェックボックスの表示はCommandURLによるもの？チェックボックスを表示させるCommandURLということか。
             submenucontainer.insertByIndex(2, menuentry)  # 第1引数は挿入する位置。飛び番はエラーになる。そこにすでにあるものは下にずれる。
-            rootmenuentry = createMenuEntry("ActionTrigger", {"Text": "Help", "CommandURL": "slot:5410", "HelpURL": "5410", "SubContainer": submenucontainer}) 
+            rootmenuentry = createMenuEntry("ActionTrigger", {"Text": "Help", "CommandURL": ".uno:HelpMenu", "HelpURL": "5410", "SubContainer": submenucontainer}) 
             contextmenu.insertByIndex(0, rootmenuentry)  # 第1引数は挿入する位置。飛び番はエラーになる。そこにすでにあるものは下にずれる。
             separator = createMenuEntry("ActionTriggerSeparator", {"SeparatorType": ActionTriggerSeparatorType_LINE})
             contextmenu.insertByIndex(1, separator)  # 第1引数は挿入する位置。飛び番はエラーになる。そこにすでにあるものは下にずれる。
