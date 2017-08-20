@@ -64,7 +64,7 @@ class ContextMenuInterceptor(unohelper.Base, XContextMenuInterceptor):
             submenucontainer.insertByIndex(0, menuentry)  # 第1引数は挿入する位置。飛び番はエラーになる。そこにすでにあるものは下にずれる。
             menuentry = createMenuEntry("ActionTrigger", {"Text": "Help Agent", "CommandURL": "slot:5962", "HelpURL": "5962"})
             submenucontainer.insertByIndex(1, menuentry)  # 第1引数は挿入する位置。飛び番はエラーになる。そこにすでにあるものは下にずれる。
-            menuentry = createMenuEntry("ActionTrigger", {"Text": "Tips", "CommandURL": "slot:5404", "HelpURL": "5404"})
+            menuentry = createMenuEntry("ActionTrigger", {"Text": "Tips", "CommandURL": "slot:5404", "HelpURL": "5404"})  # テェックボックスの表示はCommandURLによるもの？
             submenucontainer.insertByIndex(2, menuentry)  # 第1引数は挿入する位置。飛び番はエラーになる。そこにすでにあるものは下にずれる。
             rootmenuentry = createMenuEntry("ActionTrigger", {"Text": "Help", "CommandURL": "slot:5410", "HelpURL": "5410", "SubContainer": submenucontainer}) 
             contextmenu.insertByIndex(0, rootmenuentry)  # 第1引数は挿入する位置。飛び番はエラーになる。そこにすでにあるものは下にずれる。
