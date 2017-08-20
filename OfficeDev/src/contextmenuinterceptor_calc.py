@@ -39,10 +39,7 @@ def enableRemoteDebugging(func):  # デバッグサーバーに接続したい�
 # @enableRemoteDebugging
 def macro():  # マクロで実行するとフリーズする。
     doc = XSCRIPTCONTEXT.getDocument()  # マクロを起動した時のドキュメントのモデルを取得。 
-    infomsg = "All context menus of the created document frame contains now a 'Help' entry with the submenus 'Content', 'Help Agent' and 'Tips'.\n\nPress 'Return' in the shell to remove the context menu interceptor and finish the example!"
-    doc.getText().setString(infomsg)
     controller = doc.getCurrentController()
-    controller.getViewSettings().setPropertyValue("ZoomType", 0)
     contextmenuinterceptor = ContextMenuInterceptor()
     controller.registerContextMenuInterceptor(contextmenuinterceptor)
     print("\n ... all context menus of the created document frame contains now a 'Help' entry with the\n     submenus 'Content', 'Help Agent' and 'Tips'.\n\nPress 'Return' to remove the context menu interceptor and finish the example!")
@@ -71,6 +68,12 @@ class ContextMenuInterceptor(unohelper.Base, XContextMenuInterceptor):
             separator = createMenuEntry("ActionTriggerSeparator", {"SeparatorType": ActionTriggerSeparatorType_LINE})
             contextmenu.insertByIndex(1, separator)  # 第1引数は挿入する位置。飛び番はエラーになる。そこにすでにあるものは下にずれる。
             return EXECUTE_MODIFIED
+        except UnknownPropertyException as e:
+            print(e)
+        except IndexOutOfBoundsException as e:    
+            print(e)
+        except Exception as e:    
+            print(e)
         except:
             import traceback; traceback.print_exc()
         return IGNORED
@@ -121,7 +124,7 @@ if __name__ == "__main__":  # オートメーションで実行するとき
     XSCRIPTCONTEXT = main()  # XSCRIPTCONTEXTを取得。
     doc = XSCRIPTCONTEXT.getDocument()  # ドキュメントを取得。
     if not hasattr(doc, "getCurrentController"):  # ドキュメント以外のとき。スタート画面も除外。
-        XSCRIPTCONTEXT.getDesktop().loadComponentFromURL("private:factory/swriter", "_blank", 0, ())  # Writerのドキュメントを開く。
+        XSCRIPTCONTEXT.getDesktop().loadComponentFromURL("private:factory/scalc", "_blank", 0, ())  # Writerのドキュメントを開く。
         while doc is None:  # ドキュメントのロード待ち。
             doc = XSCRIPTCONTEXT.getDocument()
     macro()
