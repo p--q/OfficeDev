@@ -1,4 +1,6 @@
 eclipse.preferences.version=1
 encoding//src/contextmenuinterceptor.py=utf-8
 encoding//src/pathsettingstest.py=utf-8
+encoding//src/pathsettingstest_macro.py=utf-8
 encoding//src/pathsubstitutiontest.py=utf-8
+encoding//src/pathsubstitutiontest_macro.py=utf-8
