@@ -34,10 +34,10 @@ def macro():
 								"UserConfig",\
 								"UserDictionary",\
 								"Work"  # https://wiki.openoffice.org/wiki/Documentation/DevGuide/OfficeDev/Path_Settings
-	pathsettingsservice = ctx.getByName('/singletons/com.sun.star.util.thePathSettings')
+	pathsettingssingleton = ctx.getByName('/singletons/com.sun.star.util.thePathSettings')
 	for predefinedpathproperty in predefinedpathproperties:
 		try:
-			url = pathsettingsservice.getPropertyValue(predefinedpathproperty)
+			url = pathsettingssingleton.getPropertyValue(predefinedpathproperty)
 		except UnknownPropertyException:
 			t = "Cannot get a property value of {}.".format(predefinedpathproperty)
 			print(t, file=sys.stderr)
@@ -50,7 +50,7 @@ def macro():
 	for predefinedpathproperty in predefinedpathproperties:  # プロパティ名に_writableをつけてみる。パスが取得できたもののみ出力。
 		predefinedpathproperty = "{}_writable".format(predefinedpathproperty)
 		try:
-			url = pathsettingsservice.getPropertyValue(predefinedpathproperty)
+			url = pathsettingssingleton.getPropertyValue(predefinedpathproperty)
 		except:
 			continue
 		if url:		
